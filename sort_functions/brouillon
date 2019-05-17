@@ -1,0 +1,12 @@
+tata:	lst->content1		toto:	lst->content2		titi:	lst->content3
+		lst->next = toto			lst->next = titi			lst->next = NULL
+
+swap tata et toto
+
+tata:	lst->content2		toto:	lst->content1		titi:	lst->content3
+		lst->next = titi			lst->next = toto			lst->next = NULL
+
+swap tata->next et toto->next
+
+tata:	lst->content2		toto:	lst->content1		titi:	lst->content3
+		lst->next = toto			lst->next = titi			lst->next = NULL
