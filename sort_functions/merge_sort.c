@@ -6,13 +6,11 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:56:52 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/18 16:05:26 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:32:10 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void		ft_printlist(t_list *lst);
 
 static void	ft_share_lst(t_list **lst)
 {
