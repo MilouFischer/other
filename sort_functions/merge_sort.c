@@ -6,50 +6,13 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:56:52 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/18 15:53:36 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:05:26 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 void		ft_printlist(t_list *lst);
-
-/*void		ft_merge_sort(t_list **lst)
-{
-	t_list	*head;
-	t_list	*tmp;
-
-	if (*lst == NULL || (*lst)->next == NULL)
-		return ;
-	head = *lst;
-	tmp = head;
-	while (*lst != NULL && (*lst)->next != NULL)
-	{
-		if (ft_strcmp((*lst)->content, (*lst)->next->content) > 0)
-		{
-			if (*lst == head)
-			{
-				tmp = (*lst)->next;
-				(*lst)->next = tmp->next;
-				tmp->next = *lst;
-				head = tmp;
-			}
-			else
-			{
-				tmp->next = (*lst)->next;
-				(*lst)->next = (*lst)->next->next;
-				tmp->next->next = *lst;
-			}
-			*lst = head;
-		}
-		else
-		{
-			tmp = *lst;
-			*lst = (*lst)->next;
-		}
-	}
-	*lst = head;
-}*/
 
 static void	ft_share_lst(t_list **lst)
 {
@@ -67,34 +30,31 @@ static void	ft_share_lst(t_list **lst)
 	}
 }
 
+void		ft_add_link(t_list **lst1, t_list **lst2, t_list **head)
+{
+	if (ft_strcmp((*lst1)->content, (*lst2)->content) > 0)
+	{
+		*head = *lst2;
+		*lst2 = (*lst2)->next;
+	}
+	else
+	{
+		*head = *lst1;
+		*lst1 = (*lst1)->next;
+	}
+}
+
 t_list		*ft_merge_list(t_list *lst1, t_list *lst2)
 {
 	t_list	*head;
 	t_list	*tmp;
 
-	if (ft_strcmp(lst1->content, lst2->content) > 0)
-	{
-		head = lst2;
-		lst2 = lst2->next;
-	}
-	else
-	{
-		head = lst1;
-		lst1 = lst1->next;
-	}
+	head = NULL;
+	ft_add_link(&lst1, &lst2, &head);
 	tmp = head;
 	while (lst1 != NULL && lst2 != NULL)
 	{
-		if (ft_strcmp(lst1->content, lst2->content) > 0)
-		{
-			tmp->next = lst2;
-			lst2 = lst2->next;
-		}
-		else
-		{
-			tmp->next = lst1;
-			lst1 = lst1->next;
-		}
+		ft_add_link(&lst1, &lst2, &tmp->next);
 		tmp = tmp->next;
 	}
 	while (lst1 != NULL)
@@ -123,10 +83,6 @@ void		ft_merge_sort(t_list **lst)
 	ft_share_lst(lst);
 	lst2 = (*lst)->next;
 	(*lst)->next = NULL;
-	ft_printf("\nlst1:\n");
-	ft_printlist(lst1);
-	ft_printf("\nlst2:\n");
-	ft_printlist(lst2);
 	ft_merge_sort(&lst1);
 	ft_merge_sort(&lst2);
 	*lst = ft_merge_list(lst1, lst2);
