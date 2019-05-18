@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:30:02 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/18 13:28:54 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:52:42 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_printlist(t_list *lst)
 
 int				main(void)
 {
-	char	*tab[] = {"tete", "titi", "toto", "tutu", "tyty", "tztz"};
+	char	*tab[] = {"tete", "tyty", "toto", "tutu", "titi", "tztz", "tata", NULL};
 	t_list	*lst;
 	size_t	i;
 
@@ -33,7 +33,7 @@ int				main(void)
 	lst = NULL;
 	while (tab[i] != NULL)
 	{
-		ft_lstadd(&lst, ft_lstnew(tab[i], sizeof(tab[i])));
+		ft_lstadd(&lst, ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
 		i++;
 	}
 	ft_printlist(lst);
