@@ -1,12 +1,34 @@
-tata:	lst->content1		toto:	lst->content2		titi:	lst->content3
-		lst->next = toto			lst->next = titi			lst->next = NULL
+lst1			lst2			lst3			lst4
+next = lst2		next = lst3		next = lst4		next = NULL
 
-swap tata et toto
 
-tata:	lst->content2		toto:	lst->content1		titi:	lst->content3
-		lst->next = titi			lst->next = toto			lst->next = NULL
 
-swap tata->next et toto->next
 
-tata:	lst->content2		toto:	lst->content1		titi:	lst->content3
-		lst->next = toto			lst->next = titi			lst->next = NULL
+lst1->next => lst2->next
+
+lst1		 >| lst2		|<	lst3			lst4
+next = lst3	 >| next = lst3	|<	next = lst4		next = NULL
+
+
+
+
+lst2->next => lst3->next
+
+lst1		 >| lst2		 |< lst3			lst4
+next = lst3	 >| next = lst4  |< next = lst4		next = NULL
+
+
+
+
+lst3->next => lst2
+
+lst1		  lst2			lst3		   lst4		 
+next = lst3	  next = lst4	next = lst2	   next = NULL 
+
+
+
+
+SWAP LST2 ET LST3
+
+lst1			lst3			lst2			lst4
+next = lst3		next = lst2		next = lst4		next = NULL

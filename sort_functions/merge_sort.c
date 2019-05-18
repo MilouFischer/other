@@ -6,38 +6,49 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:56:52 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/17 19:53:52 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:09:44 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
+void		ft_printlist(t_list *lst);
 
 void		ft_merge_sort(t_list **lst)
 {
 	t_list	*head;
 	t_list	*tmp;
-	char	*s1;
-	char	*s2;
 
-	head = *lst;
-	if ((*lst) == NULL || (*lst)->next == NULL)
+	if (*lst == NULL || (*lst)->next == NULL)
 		return ;
-	tmp = *lst;
-	while ((*lst)->next != NULL)
+	head = *lst;
+	tmp = head;
+	while (*lst != NULL && (*lst)->next != NULL)
 	{
-		s1 = (char *)((*lst)->content);
-		s2 = (char *)((*lst)->next->content);
-		if (ft_strcmp(s1, s2) > 0)
+		if (ft_strcmp((*lst)->content, (*lst)->next->content) > 0)
 		{
-			tmp->next = (*lst)->next;
-			(*lst)->next = (*lst)->next->next;
-			tmp->next->next = *lst;
+			if (*lst == head)
+			{
+				tmp = (*lst)->next;
+				(*lst)->next = tmp->next;
+				tmp->next = *lst;
+				head = tmp;
+			}
+			else
+			{
+				tmp->next = (*lst)->next;
+				(*lst)->next = (*lst)->next->next;
+				tmp->next->next = *lst;
+			}
 			*lst = head;
+		//	ft_printf("\nIn sort:\n");
+		//	ft_printlist(head);
 		}
-		tmp = *lst;
-		*lst = (*lst)->next;
+		else
+		{
+			tmp = *lst;
+			*lst = (*lst)->next;
+		}
 	}
 	*lst = head;
 }
