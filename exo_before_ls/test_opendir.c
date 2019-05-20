@@ -12,6 +12,8 @@
 
 #include <dirent.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
 #include "../libft/includes/libft.h"
 
 int		main(int ac, char **av)
@@ -25,7 +27,13 @@ int		main(int ac, char **av)
 		name = av[1];
 	dir = opendir(name);
 	if (dir == NULL)
+	{
+		if (errno != ENOTDIR)
+			perror(ft_asprintf("ft_ls: file not found '%s'", name));
+		else
+			ft_putendl(name);
 		return (-1);
+	}
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		if (dirent->d_name[0] != '.')
