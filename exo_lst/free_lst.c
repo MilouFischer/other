@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 10:44:36 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 11:34:02 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:40:51 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	free_lst_content(void *content, size_t content_size)
 		ft_strdel(&((t_test*)(content))->param1);
 		ft_strdel(&((t_test*)(content))->param2);
 		ft_strdel(&((t_test*)(content))->param3);
+		free(content);
 	}
-	free(content);
 }
 
 int		main(void)
@@ -50,6 +50,5 @@ int		main(void)
 		lst = lst->next;
 	}
 	ft_lstdel(&tmp, free_lst_content);
-	while (1);
 	return (0);
 }
