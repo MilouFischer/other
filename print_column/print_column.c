@@ -15,26 +15,27 @@ static void		ft_get_padding(char **av, size_t *padding)
 static void		ft_print_column(int ac, char **av, size_t padding)
 {
 	struct winsize	w;
-	size_t			nb_arg_on_line;
+	size_t			nb_max_by_line;
 	size_t			nb_line;
 	size_t			i;
+	size_t			index;
 
-	(void)av;
+	(void)ac;
 	ioctl(0, TIOCGWINSZ, &w);
-	nb_line = w.ws_row / padding;
-	nb_arg_on_line = ac / nb_line;
-	while (nb_line > 0)
+	nb_max_by_line = w.ws_col / padding;
+	nb_line = ac / nb_max_by_line + 1;
+	i = 0;
+	while (i < nb_line)
 	{
-		i = 0;
-		while (i < nb_arg_on_line)
+		index = i;
+		while ((int)index < ac)
 		{
-			ft_printf("%-*s", padding, *av++);
-			i++;
+			ft_printf("%-*s", padding, av[index]);
+			index += nb_line;
 		}
 		ft_putchar('\n');
-		nb_line--;
+		i++;
 	}
-	//ft_printf("nb_line: %d, nb_arg_on_line: %d\n", nb_line, nb_arg_on_line);
 }
 
 int				main(int ac, char **av)
@@ -43,6 +44,5 @@ int				main(int ac, char **av)
 
 	ft_get_padding(av, &padding);
 	ft_print_column(ac, av, padding);
-	ft_putchar('\n');
 	return (0);
 }
