@@ -6,13 +6,13 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:36:05 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/15 15:19:21 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/18 11:36:33 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-static void	get_env_lst(char **envp, t_list **lst)
+static void		get_env_lst(char **envp, t_list **lst)
 {
 	t_env	env;
 	char	**tab;
@@ -22,7 +22,7 @@ static void	get_env_lst(char **envp, t_list **lst)
 	while (envp[i] != NULL)
 	{
 		ft_bzero(&env, sizeof(env));
-		env.all = ft_strdup(envp[i]);
+		env.all = envp[i];
 		tab = ft_strsplit(envp[i], '=');
 		env.name = ft_strdup(tab[0]);
 		env.value = ft_strdup(tab[1]);
@@ -32,36 +32,19 @@ static void	get_env_lst(char **envp, t_list **lst)
 	}
 }
 
-static void	find_env(t_list *lst, char *arg)
-{
-	while (lst != NULL)
-	{
-		if (ft_strequ(((t_env*)(lst->content))->name, arg) == TRUE)
-		{
-			ft_putendl(((t_env*)(lst->content))->all);
-			return ;
-		}
-		lst = lst->next;
-	}
-}
-
-int			main(int ac, char **av, char **envp)
+int				main(int ac, char **av, char **envp)
 {
 	t_list	*lst;
+	char	**tab;
 
+	(void)av;
+	(void)ac;
 	lst = NULL;
 	ft_bzero(&lst, sizeof(lst));
 	get_env_lst(envp, &lst);
-	if (ac > 1)
-	{
-		while (*av != NULL)
-			find_env(lst, *av++);
-	}
-	else
-		while (lst != NULL)
-		{
-			ft_putendl(((t_env*)(lst->content))->all);
-			lst = lst->next;
-		}
+	tab = env_to_tab(lst);
+	if (tab == NULL)
+		ft_putendl("Error");
+	ft_print_tab(tab);
 	return (0);
 }
