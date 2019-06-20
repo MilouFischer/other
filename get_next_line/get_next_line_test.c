@@ -63,5 +63,7 @@ int			get_next_line_test(const int fd, char **line)
 			return (1);
 	}
 	ret = read_line(fd, line, &rest);
+	if (*line != NULL)
+		return (1);
 	return (ret);
 }
