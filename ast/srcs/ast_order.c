@@ -15,12 +15,17 @@
 	return (ast);
 }*/
 
-static void	node_rot(t_ast **ast, t_ast *prev_node)
+static void	node_rot(t_ast **ast, t_ast *prev_node, t_ast **head)
 {
 	t_ast	*tmp;
 
 	if (prev_node == NULL)
-		ft_putendl("prev_node == NULL");
+	{
+		tmp = (*ast)->right;
+		(*head)->right = ((t_ast*)(tmp))->left;
+		((t_ast*)(tmp))->left = (*head);
+		(*head) = tmp;
+	}
 	else
 	{
 		tmp = *ast;
@@ -43,13 +48,18 @@ void		ast_order(t_ast **ast)
 		{
 			if (((t_ast*)((*ast)->right))->type == AND)
 			{
-				ft_putendl("\nROTATION\n");
-				node_rot(ast, prev_node);
+				node_rot(ast, prev_node, &head);
 				*ast = head;
+				prev_node = NULL;
+			}
+			else
+			{
+				prev_node = *ast;
+				*ast = (*ast)->right;
 			}
 		}
-		prev_node = *ast;
-		*ast = (*ast)->right;
+		else
+			*ast = (*ast)->right;
 	}
 	*ast = head;
 }
