@@ -40,7 +40,7 @@ void		ast_order(t_ast **ast)
 	prev_node = NULL;
 	while ((*ast)->right)
 	{
-		if ((*ast)->TYPE == AND_IF || (*ast)->type == OR_IF)
+		if ((*ast)->type == AND_IF || (*ast)->type == OR_IF)
 		{
 			if (((t_ast*)((*ast)->right))->type == AND)
 				node_rot(ast, prev_node);

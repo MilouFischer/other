@@ -5,22 +5,21 @@ void	debug_ast(t_ast *ast)
 {
 	if (ast == NULL)
 		return ;
+	if (ast->type == SEMI)
+		ft_putendl("SEMI");
+	else if (ast->type == AND)
+		ft_putendl("AND");
+	else if (ast->type == AND_IF)
+		ft_putendl("AND_IF");
+	else if (ast->type == OR_IF)
+		ft_putendl("OR_IF");
+	else if (ast->type == NONE)
+		ft_putendl("NONE");
+	debug(ast->content);
 	if (ast->left != NULL)
 	{
-		debug_ast(ast->left);
 		ft_putendl("LEFT");
-		debug(ast->content);
-	}
-	else
-	{
-		if (ast->type == SEMI)
-			ft_putendl("SEMI");
-		if (ast->type == AND)
-			ft_putendl("AND");
-		if (ast->type == AND_IF)
-			ft_putendl("AND_IF");
-		if (ast->type == OR_IF)
-			ft_putendl("OR_IF");
+		debug_ast(ast->left);
 		debug(ast->content);
 	}
 	if (ast->right != NULL)

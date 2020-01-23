@@ -1,6 +1,22 @@
 #include "libft.h"
 #include "ast.h"
 
+static void		astadd_left(t_ast **ast, t_ast *new_ast)
+{
+	t_ast	*head;
+
+	head = *ast;
+	if (*ast == NULL)
+		*ast = new_ast;
+	else
+	{
+		while ((*ast)->left != NULL)
+			*ast = (*ast)->right;
+		(*ast)->left = new_ast;
+		*ast = head;
+	}
+}
+
 static void		astadd_right(t_ast **ast, t_ast *new_ast)
 {
 	t_ast	*head;
@@ -55,7 +71,7 @@ static int	border_token_list(t_list **lst, uint64_t token_type)
 	return (ret);
 }
 
-static int	get_token_list(const char *str, size_t *pos, t_list **lst)
+static int	get_token_list(const char *str, size_t *pos, t_list **lst, uint64_t *type)
 {
 	t_token	token;
 	t_token	last_token;
@@ -77,7 +93,7 @@ static int	get_token_list(const char *str, size_t *pos, t_list **lst)
 		if (token.type == SEMI || token.type == OR_IF || token.type == AND_IF
 			|| token.type == AND)
 		{
-			ret = token.type;
+			*type = token.type;
 			break ;
 		}
 		ret = add_token_to_list(&token, lst);
@@ -102,18 +118,21 @@ int			lexer(const char *str, t_ast **ast)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
+		type = NONE;
 		lst = NULL;
 		ret = border_token_list(&lst, START);
 		if (ret == SUCCESS)
 		{
-			type = get_token_list(str, &pos, &lst);
-			if ((int)type != FAILURE)
+			ret = get_token_list(str, &pos, &lst, &type);
+			if (ret == SUCCESS)
 				ret = border_token_list(&lst, END);
 			else
 				ret = FAILURE;
 		}
-		new_ast = astnew(lst, type);
+		new_ast = astnew(NULL, type);
 		astadd_right(ast, new_ast);
+		new_ast = astnew(lst, NONE);
+		astadd_left(ast, new_ast);
 	}
 	return (ret);
 }

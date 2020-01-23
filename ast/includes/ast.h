@@ -11,7 +11,7 @@
 # include "vctlib.h"
 
 # define BUF_SIZE	32
-# define NB_TOKEN	22
+# define NB_TOKEN	23
 # define NB_BRACKET	3
 # define TAB_END	-1
 
@@ -51,7 +51,8 @@ enum	e_token
 	END_OF_FILE,
 	COMMENT,
 	START,
-	END
+	END,
+	NONE
 };
 
 typedef struct	s_bracket
