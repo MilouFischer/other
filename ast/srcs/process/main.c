@@ -21,7 +21,7 @@ int 	main(int ac, char **av)
 	if (ac == 2)
 	{
 		lexer(av[1], &ast);
-//		parser(ast, buffer, index);
+		ast_order(&ast);
 	}
 //	ft_putendl("DEBUG LST\n");
 //	debug(lst);
