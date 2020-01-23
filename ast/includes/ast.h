@@ -83,8 +83,8 @@ int    		set_minimal_env(void);
 void    del(void *content, size_t content_size);
 int             ft_atoifd(const char *str);
 
-int				make_ast(t_list *lst, t_ast **ast);
-void			debug_ast(t_ast *ast);
+void		debug_ast(t_ast *ast);
+void		ast_order(t_ast **ast);
 
 extern int	g_retval;
 extern char	g_pwd[];

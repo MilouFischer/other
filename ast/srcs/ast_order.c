@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "ast.h"
 
-static t_ast	*astnew(t_list *lst, uint64_t type)
+/*static t_ast	*astnew(t_list *lst, uint64_t type)
 {
 	t_ast	*ast;
 
@@ -13,21 +13,20 @@ static t_ast	*astnew(t_list *lst, uint64_t type)
 		ast->content = lst;
 	}
 	return (ast);
-}
+}*/
 
 static void	node_rot(t_ast **ast, t_ast *prev_node)
 {
 	t_ast	*tmp;
-	t_list	*content;
 
 	if (prev_node == NULL)
 		ft_putendl("prev_node == NULL");
 	else
 	{
 		tmp = *ast;
-		content = ((t_ast*)(*ast)->right)->content;
 		prev_node->right = (*ast)->right;
-		tmp->right = astnew(content, SEMI);
+		tmp->right = ((t_ast*)(prev_node->right))->left;
+		((t_ast*)(prev_node->right))->left = tmp;
 	}
 }
 
@@ -43,9 +42,14 @@ void		ast_order(t_ast **ast)
 		if ((*ast)->type == AND_IF || (*ast)->type == OR_IF)
 		{
 			if (((t_ast*)((*ast)->right))->type == AND)
+			{
+				ft_putendl("\nROTATION\n");
 				node_rot(ast, prev_node);
+				*ast = head;
+			}
 		}
 		prev_node = *ast;
 		*ast = (*ast)->right;
 	}
+	*ast = head;
 }
