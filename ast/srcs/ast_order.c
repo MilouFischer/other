@@ -59,7 +59,10 @@ void		ast_order(t_ast **ast)
 			}
 		}
 		else
+		{
+			prev_node = *ast;
 			*ast = (*ast)->right;
+		}
 	}
 	*ast = head;
 }
