@@ -23,10 +23,9 @@ int 	main(int ac, char **av)
 		lexer(av[1], &ast);
 		ast_order(&ast);
 	}
-//	ft_putendl("DEBUG LST\n");
-//	debug(lst);
 	ft_putendl("\nDEBUG AST\n");
 	debug_ast(ast);
-//	ft_lstdel(&lst, del);
+	astdel(&ast);
+	debug_ast(ast);
 	return (EXIT_SUCCESS);
 }

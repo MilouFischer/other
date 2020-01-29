@@ -85,6 +85,7 @@ int             ft_atoifd(const char *str);
 
 void		debug_ast(t_ast *ast);
 void		ast_order(t_ast **ast);
+void		astdel(t_ast **ast);
 
 extern int	g_retval;
 extern char	g_pwd[];
