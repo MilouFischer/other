@@ -10,17 +10,14 @@ void	del(void *content, size_t content_size)
 
 int 	main(int ac, char **av)
 {
-//	int			index;
-//	t_list		*lst;
 	t_ast		*ast;
-//	uint64_t	buffer[BUF_SIZE];
 
-//	lst = NULL;
 	ast = NULL;
-//	index = 0;
 	if (ac == 2)
 	{
 		lexer(av[1], &ast);
+		if (parser(ast) == FAILURE)
+			ft_putendl("\nParse error\n");
 		ast_order(&ast);
 	}
 	ft_putendl("\nDEBUG AST\n");

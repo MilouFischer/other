@@ -70,7 +70,7 @@ typedef struct	s_ast
 }				t_ast;
 
 int		lexer(const char* str, t_ast **ast);
-int		parser(t_ast *ast, uint64_t *buffer, size_t index);
+int		parser(t_ast *ast);
 int		bracket(t_list *lst, uint64_t *buffer, size_t index);
 void	debug(t_list *lst);
 int		get_stdin(char **line);
@@ -86,6 +86,7 @@ int             ft_atoifd(const char *str);
 void		debug_ast(t_ast *ast);
 void		ast_order(t_ast **ast);
 void		astdel(t_ast **ast);
+int			parser_pipeline(t_list *lst, uint64_t *buffer, size_t index);
 
 extern int	g_retval;
 extern char	g_pwd[];

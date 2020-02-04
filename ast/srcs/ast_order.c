@@ -42,26 +42,29 @@ void		ast_order(t_ast **ast)
 
 	head = *ast;
 	prev_node = NULL;
-	while ((*ast)->right)
+	if (*ast != NULL)
 	{
-		if ((*ast)->type == AND_IF || (*ast)->type == OR_IF)
+		while ((*ast)->right)
 		{
-			if (((t_ast*)((*ast)->right))->type == AND)
+			if ((*ast)->type == AND_IF || (*ast)->type == OR_IF)
 			{
-				node_rot(ast, prev_node, &head);
-				*ast = head;
-				prev_node = NULL;
+				if (((t_ast*)((*ast)->right))->type == AND)
+				{
+					node_rot(ast, prev_node, &head);
+					*ast = head;
+					prev_node = NULL;
+				}
+				else
+				{
+					prev_node = *ast;
+					*ast = (*ast)->right;
+				}
 			}
 			else
 			{
 				prev_node = *ast;
 				*ast = (*ast)->right;
 			}
-		}
-		else
-		{
-			prev_node = *ast;
-			*ast = (*ast)->right;
 		}
 	}
 	*ast = head;
