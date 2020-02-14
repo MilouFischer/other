@@ -83,6 +83,7 @@ static int	get_token_list(const char *str, size_t *pos, t_list **lst, uint64_t *
 	{
 		while (ft_isblank(str[*pos]) == TRUE)
 			(*pos)++;
+		ft_putendl(str + *pos);
 		if (str[*pos] == '\0')
 			break ;
 		ft_bzero(&token, sizeof(token));
