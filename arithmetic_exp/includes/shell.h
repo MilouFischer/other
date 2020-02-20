@@ -6,21 +6,51 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:18:01 by efischer          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2020/02/12 14:22:19 by efischer         ###   ########.fr       */
+=======
 /*   Updated: 2020/02/14 15:37:02 by efischer         ###   ########.fr       */
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
+<<<<<<< HEAD
+# include <signal.h>
+# include <limits.h>
+# include <termios.h>
+# include <stddef.h>
+# include <stdint.h>
+# include <stdio.h>
+=======
 # include <limits.h>
 # include <termios.h>
 # include <stdint.h>
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+<<<<<<< HEAD
+# include <sys/wait.h>
+
+# include "libft.h"
+# include "vctlib.h"
+# include "ft_getopt.h"
+# include "error.h"
+# include "ft_errno.h"
+# include "arithmetic_exp.h"
+
+# ifndef WAIT_ANY
+#  define WAIT_ANY -1
+# endif
+
+# ifndef PATH_MAX
+#  define PATH_MAX 1024
+=======
 
 # include "libft.h"
 # include "vctlib.h"
@@ -31,6 +61,7 @@
 
 # ifndef PATH_MAX
 # define PATH_MAX 1024
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 # endif
 
 /* Flags of instruction type of redirection */
@@ -121,6 +152,11 @@ void    free_job(t_job *j);
 int	launch_process(t_process *p, pid_t pgid, int infile, int outfile, int errfile, int foreground);
 void	free_process(t_process *p);
 int     execute_process(char **argv, char **envp);
+<<<<<<< HEAD
+void	put_job_in_foreground(t_job *j, int cont);
+void    put_job_in_background(t_job *j, int cont);
+=======
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 
 int     launch_builtin(t_process *p);
 int	has_redirections(int type);
@@ -134,7 +170,11 @@ int	undo_redirection(t_redirection *r);
 # define FALSE		0
 
 # define BUF_SIZE	32
+<<<<<<< HEAD
+# define NB_TOKEN	31
+=======
 # define NB_TOKEN	25
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 # define NB_BRACKET	3
 # define TAB_END	-1
 
@@ -173,6 +213,15 @@ enum	e_token
 	LESS,
 	WORD,
 	IO_NB,
+<<<<<<< HEAD
+	NB,
+	PLUS,
+	MIN,
+	MULT,
+	DIV,
+	MOD,
+=======
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 	END_OF_FILE,
 	COMMENT,
 	START,
@@ -186,13 +235,21 @@ typedef struct	s_bracket
 	uint64_t	close;
 }				t_bracket;
 
+<<<<<<< HEAD
+typedef struct	s_ast
+=======
 /*typedef struct	s_ast
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 {
 	uint64_t	type;
 	t_list		*content;
 	void		*left;
 	void		*right;
+<<<<<<< HEAD
+}				t_ast;
+=======
 }				t_ast;*/
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 
 int		lexer(char* str, t_ast **ast);
 int		parser(t_ast *ast);

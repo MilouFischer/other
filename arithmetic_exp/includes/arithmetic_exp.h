@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+#ifndef ARITHMETIC_EXP_H
+# define ARITHMETIC_EXP_H
+
+typedef struct	arithmetic_ast
+{
+	t_arithmetic_ast	*left;
+	t_arithmetic_ast	*right;
+	char				*value;
+
+}				t_arithmetic_ast;
+=======
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -26,5 +38,6 @@ typedef struct	s_ast
 
 int		arithmetic_lexer(const char *str, t_ast **ast);
 int		arithmetic_parser(t_ast **ast);
+>>>>>>> 422646de6db416f169e3c69d1bdc6eee46e12aad
 
 #endif
