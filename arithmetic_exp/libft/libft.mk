@@ -227,4 +227,4 @@ DEPENDS := $(patsubst %.c,%.d,$(addprefix $(SOURCES_PATH), $(SOURCES)))
 
 ARFLAGS := rc
 
-CFLAGS += -Wall -Werror -Wextra -ansi -std=c99 -D_POSIX_C_SOURCE -fno-builtin -O2
+CFLAGS += -Wall -Werror -Wextra -fsanitize=address,undefined -g3 -ansi -std=c99 -D_POSIX_C_SOURCE -fno-builtin -O2

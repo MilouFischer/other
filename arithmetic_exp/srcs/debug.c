@@ -58,7 +58,7 @@ static void	print(t_list *lst, t_list **elem)
 		{
 			if (i == WORD || i == IO_NB || i == END_OF_FILE)
 				tmp = ((t_token*)(lst->content))->value;
-			print_content = ft_asprintf("%s -> [%s]\n", token_tab[i], tmp);
+			ft_asprintf(&print_content, "%s -> [%s]\n", token_tab[i], tmp);
 			break ;
 		}
 		i++;
